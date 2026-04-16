@@ -1,6 +1,6 @@
 # AV1-IntroducaoLogicaDeProgramacao
 
-## Equipe: Alexandre Carvalho, Erick, Jailton Santos, Messias Santiago, Rafael Vitor
+## Equipe: Alexandre Carvalho, Erick Pablo, Jailton Santos, Messias Santiago, Rafael Vitor
 
 ### ATIVIDADE PROPOSTA
 => PROJETO I (Sistema de Medias e Matrıculas)
