@@ -1,0 +1,67 @@
+INÍCIO
+
+DECLARE exec, response COMO CARACTERE
+DECLARE studentName, subject COMO TEXTO
+DECLARE docId, studentId COMO INTEIRO
+DECLARE subjectCount COMO INTEIRO ← 0
+DECLARE subjectAverage, totalAverage, averageSum COMO REAL ← 0
+
+REPITA
+
+    ESCREVA "SEJA BEM-VINDO AO SISTEMA DE MÉDIAS E MATRÍCULAS"
+    ESCREVA "Digite C para continuar ou S para sair"
+    LEIA exec
+
+    SE exec = 'S' OU exec = 's' ENTÃO
+        PARE
+    FIMSE
+
+    ESCREVA "Digite o nome do aluno:"
+    LEIA studentName
+
+    ESCREVA "Digite o documento do aluno:"
+    LEIA docId
+
+    ESCREVA "Digite o número de matrícula:"
+    LEIA studentId
+
+    // Reiniciar contadores para novo aluno
+    subjectCount ← 0
+    averageSum ← 0
+
+    REPITA
+        ESCREVA "Digite o nome da disciplina:"
+        LEIA subject
+
+        ESCREVA "Digite a média da disciplina (valor negativo para sair):"
+        LEIA subjectAverage
+
+        SE subjectAverage ≥ 0 ENTÃO
+            subjectCount ← subjectCount + 1
+            averageSum ← averageSum + subjectAverage
+        FIMSE
+
+    ATÉ subjectAverage < 0
+
+    totalAverage ← averageSum / subjectCount
+
+    ESCREVA "MÉDIA GERAL: ", totalAverage
+
+    SE totalAverage ≥ 7 ENTÃO
+        ESCREVA "ALUNO APROVADO"
+        ESCREVA "Escolha disciplina avançada (1 a 5)"
+    SENÃO
+        ESCREVA "ALUNO REPROVADO"
+        ESCREVA "Deseja repetir disciplina? (s/n)"
+        LEIA response
+
+        SE response = 's' ENTÃO
+            ESCREVA "Escolha disciplina básica (1 a 4)"
+        SENÃO
+            ESCREVA "Escolha disciplina alternativa (1 a 5)"
+        FIMSE
+    FIMSE
+
+ATÉ exec = 'S' OU exec = 's'
+
+FIM
