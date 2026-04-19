@@ -20,11 +20,12 @@ Adicionalmente, as estruturas utilizadas no desenvolvimento do programa deverao 
 
 #include <stdio.h>
 
-int main(){
+int main()
+{
   char exec, response;
   char studentName[20], subject[12];
-  int docId, studentId, subjectCount = 0;
-  float subjectAverage = 0., totalAverage = 0., averageSum = 0.;
+  int docId, studentId, subjectCount;
+  float subjectAverage = 0., totalAverage = 0., averageSum;
 
   do
   {
@@ -37,13 +38,17 @@ int main(){
     {
       break;
     }
-    
+
     printf("Para iniciar, digite o Nome do Aluno:\n");
     scanf(" %s", &studentName);
     printf("\nAgora digite o numero do Documento de Identificacao do aluno (somente numeros):\n");
     scanf(" %d", &docId);
     printf("\nPor fim, digite o Numero de Matricula do aluno (somente numeros):\n");
     scanf(" %d", &studentId);
+
+    // Reiniciar contadores para novo aluno
+    subjectCount = 0;
+    averageSum = 0.;
 
     do
     {
@@ -52,24 +57,30 @@ int main(){
       printf("\nInsira a Media do aluno nesta Disciplina:\n");
       scanf(" %f", &subjectAverage);
 
-      if(subjectAverage >= 0){
+      if (subjectAverage >= 0)
+      {
         subjectCount += 1;
         averageSum += subjectAverage;
       }
     } while (subjectAverage >= 0);
-    
+
     totalAverage = averageSum / subjectCount;
     printf("\nMEDIA GERAL DO ALUNO: %.1f", totalAverage);
 
-    if(totalAverage >= 7){
+    if (totalAverage >= 7)
+    {
       printf("\n\nO aluno foi APROVADO. Escolha uma das 5 disciplinas avancadas para cursar:\n1-DISCIPLINA AVANÇADA I\n2-DISCIPLINA AVANÇADA II\n3-DISCIPLINA AVANÇADA III\n4-DISCIPLINA AVANÇADA IV\n5-DISCIPLINA AVANÇADA V\n");
-    }else{
+    }
+    else
+    {
       printf("\n\nO aluno foi REPROVADO. O aluno deseja repetir a disciplina? (s/n)");
       scanf(" %c", &response);
       if (response == 's')
       {
         printf("\n\nEscolha uma das 4 disciplinas para cursar:\n1-DISCIPLINA BASICA I\n2-DISCIPLINA BASICA II\n3-DISCIPLINA BASICA III\n4-DISCIPLINA BASICA IV\n");
-      } else {
+      }
+      else
+      {
         printf("\n\nEscolha uma das 5 disciplinas para cursar:\n1-DISCIPLINA ALTERNATIVA I\n2-DISCIPLINA ALTERNATIVA II\n3-DISCIPLINA ALTERNATIVA III\n4-DISCIPLINA ALTERNATIVA IV\n5-DISCIPLINA ALTERNATIVA V\n");
       }
     }
