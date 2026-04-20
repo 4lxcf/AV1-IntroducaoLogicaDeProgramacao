@@ -20,59 +20,101 @@ Adicionalmente, as estruturas utilizadas no desenvolvimento do programa deverao 
 
 #include <stdio.h>
 
-int main(){
+int main()
+{
+  // Declaração das variáveis
   char exec, response;
   char studentName[20], subject[12];
-  int docId, studentId, subjectCount = 0;
-  float subjectAverage = 0., totalAverage = 0., averageSum = 0.;
+  int docId, studentId, subjectCount, selection;
+  float subjectAverage = 0., totalAverage = 0., averageSum;
 
+  // Inicio do loop do menu principal do programa
   do
   {
-    printf("#################################################\n");
-    printf("SEJA BEM-VINDO AO SISTEMAS DE MEDIAS E MATRICULAS\n");
-    printf("#################################################\n\n");
-    printf("Deseja iniciar um novo aluno? Digite C para continuar e S para sair.\n");
+    // Menu inicial onde o usuario diz ao sistema se deseja continuar ou fechar o programa
+    printf("##############################\n");
+    printf("SISTEMA DE MEDIAS E MATRICULAS\n");
+    printf("##############################\n\n");
+    printf("Deseja iniciar um novo aluno? Digite 'c' para continuar e 's' para sair.\n");
     scanf("%c", &exec);
-    if (exec == 'S' || exec == 's')
+    if (exec == 'S' || exec == 's') // Comparação lógica para continuar ou fechar o codigo
     {
       break;
     }
-    
-    printf("Para iniciar, digite o Nome do Aluno:\n");
+
+    // Atribuicao das variaveis do usuario (aluno)
+    printf("\nPara iniciar, digite o Nome do Aluno:\n");
     scanf(" %s", &studentName);
     printf("\nAgora digite o numero do Documento de Identificacao do aluno (somente numeros):\n");
     scanf(" %d", &docId);
     printf("\nPor fim, digite o Numero de Matricula do aluno (somente numeros):\n");
     scanf(" %d", &studentId);
 
+    // Reiniciar contadores para novo aluno
+    subjectCount = 0;
+    averageSum = 0.;
+
+    // Inicio do loop de registro das disciplinas cursadas e a media do aluno em cada disciplina
     do
     {
-      printf("\nInsira o nome da Disciplina cursada:\n");
+      // Atribuicao das variaveis da disciplina
+      printf("\nOtimo! Agora insira o Nome de uma Disciplina cursada:\n");
+      printf("(Caso deseje parar, coloque uma nota negativa na media)\n");
       scanf("%s", &subject);
-      printf("\nInsira a Media do aluno nesta Disciplina:\n");
+      printf("\nInsira a Media do Aluno nesta disciplina:\n");
       scanf(" %f", &subjectAverage);
 
-      if(subjectAverage >= 0){
-        subjectCount += 1;
-        averageSum += subjectAverage;
+      /*
+      Se subjectAverage for maior que 0.0 e menor que 10.0, o contador de disciplinas aumenta e a soma das medias tambem.
+      Porem, se for maior que 10, nada acontece e uma mensagem na tela mostra os valores corretos que devem ser digitados.
+      */
+      if (subjectAverage >= 0.)
+      {
+        printf("\033[H\033[J"); // Comando para limpar a tela
+        if (subjectAverage > 10.)
+        {
+          printf("\n##########################################################\n");
+          printf("Valor incorreto! Lembre-se, as notas sao entre 0.0 e 10.0!\n");
+          printf("##########################################################\n");
+        }
+        else
+        {
+          subjectCount += 1;
+          averageSum += subjectAverage;
+        }
       }
-    } while (subjectAverage >= 0);
-    
+    } while (subjectAverage >= 0.);
+
+    // Calculo da Media Geral do aluno e mostragem na tela
     totalAverage = averageSum / subjectCount;
     printf("\nMEDIA GERAL DO ALUNO: %.1f", totalAverage);
 
-    if(totalAverage >= 7){
-      printf("\n\nO aluno foi APROVADO. Escolha uma das 5 disciplinas avancadas para cursar:\n1-DISCIPLINA AVANÇADA I\n2-DISCIPLINA AVANÇADA II\n3-DISCIPLINA AVANÇADA III\n4-DISCIPLINA AVANÇADA IV\n5-DISCIPLINA AVANÇADA V\n");
-    }else{
-      printf("\n\nO aluno foi REPROVADO. O aluno deseja repetir a disciplina? (s/n)");
+    // Verificacao se o aluno foi aprovado ou não, considerando media 7.0
+    if (totalAverage >= 7.)
+    {
+      printf("\n\nAluno APROVADO. Escolha uma das 5 Disciplinas Avancadas para cursar (1~5):\n1-DISCIPLINA AVANCADA I\n2-DISCIPLINA AVANCADA II\n3-DISCIPLINA AVANCADA III\n4-DISCIPLINA AVANCADA IV\n5-DISCIPLINA AVANCADA V\n");
+      scanf("%d", &selection);
+    }
+    else
+    {
+      // Caso o aluno tenha reprovado, ele escolhe se quer repetir a disciplina ou nao
+      printf("\n\nAluno REPROVADO. Deseja repetir a Disciplina? (s/n)");
       scanf(" %c", &response);
+
+      // Caso deseje repetir a disciplina, ele escolhe uma das outras 4 materias que deseja cursar
       if (response == 's')
       {
-        printf("\n\nEscolha uma das 4 disciplinas para cursar:\n1-DISCIPLINA BASICA I\n2-DISCIPLINA BASICA II\n3-DISCIPLINA BASICA III\n4-DISCIPLINA BASICA IV\n");
-      } else {
-        printf("\n\nEscolha uma das 5 disciplinas para cursar:\n1-DISCIPLINA ALTERNATIVA I\n2-DISCIPLINA ALTERNATIVA II\n3-DISCIPLINA ALTERNATIVA III\n4-DISCIPLINA ALTERNATIVA IV\n5-DISCIPLINA ALTERNATIVA V\n");
+        printf("\n\nEscolha uma das 4 Disciplinas para cursar (1~4):\n1-DISCIPLINA BASICA I\n2-DISCIPLINA BASICA II\n3-DISCIPLINA BASICA III\n4-DISCIPLINA BASICA IV\n");
+        scanf("%d", &selection);
+      }
+      // Caso não deseje repetir, ele escolhe uma das outras 5 materias para cursar
+      else
+      {
+        printf("\n\nEscolha uma das 5 Disciplinas para cursar (1~5):\n1-DISCIPLINA ALTERNATIVA I\n2-DISCIPLINA ALTERNATIVA II\n3-DISCIPLINA ALTERNATIVA III\n4-DISCIPLINA ALTERNATIVA IV\n5-DISCIPLINA ALTERNATIVA V\n");
+        scanf("%d", &selection);
       }
     }
+    printf("\033[H\033[J"); // Comando para limpar a tela
   } while (exec != 'S' || exec != 's');
 
   return 0;
