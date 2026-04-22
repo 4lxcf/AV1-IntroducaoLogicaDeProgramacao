@@ -19,6 +19,7 @@ Adicionalmente, as estruturas utilizadas no desenvolvimento do programa deverao 
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main()
 {
@@ -31,17 +32,22 @@ int main()
   // Inicio do loop do menu principal do programa
   do
   {
+    // Limpa a tela a cada vez que inicializa o loop
+   system("clear");
     // Menu inicial onde o usuario diz ao sistema se deseja continuar ou fechar o programa
     printf("##############################\n");
     printf("SISTEMA DE MEDIAS E MATRICULAS\n");
     printf("##############################\n\n");
     printf("Deseja iniciar um novo aluno? Digite 'c' para continuar e 's' para sair.\n");
-    scanf("%c", &exec);
+    scanf(" %c", &exec);
     if (exec == 'S' || exec == 's') // Comparação lógica para continuar ou fechar o codigo
     {
       break;
     }
-
+    
+    // Limpa o menu do terminal
+    system("clear");
+    
     // Atribuicao das variaveis do usuario (aluno)
     printf("\nPara iniciar, digite o Nome do Aluno:\n");
     scanf(" %s", &studentName);
@@ -57,6 +63,8 @@ int main()
     // Inicio do loop de registro das disciplinas cursadas e a media do aluno em cada disciplina
     do
     {
+      // Limpa as atribuições a cada inicialização do loop
+      system("clear");
       // Atribuicao das variaveis da disciplina
       printf("\nOtimo! Agora insira o Nome de uma Disciplina cursada:\n");
       printf("(Caso deseje parar, coloque uma nota negativa na media)\n");
@@ -68,21 +76,15 @@ int main()
       Se subjectAverage for maior que 0.0 e menor que 10.0, o contador de disciplinas aumenta e a soma das medias tambem.
       Porem, se for maior que 10, nada acontece e uma mensagem na tela mostra os valores corretos que devem ser digitados.
       */
-      if (subjectAverage >= 0.)
-      {
-        printf("\033[H\033[J"); // Comando para limpar a tela
-        if (subjectAverage > 10.)
-        {
+      if (subjectAverage >= 0. && subjectAverage<=10.){
+        subjectCount += 1;
+        averageSum += subjectAverage;
+      }else{
           printf("\n##########################################################\n");
           printf("Valor incorreto! Lembre-se, as notas sao entre 0.0 e 10.0!\n");
           printf("##########################################################\n");
         }
-        else
-        {
-          subjectCount += 1;
-          averageSum += subjectAverage;
-        }
-      }
+      
     } while (subjectAverage >= 0.);
 
     // Calculo da Media Geral do aluno e mostragem na tela
@@ -114,7 +116,8 @@ int main()
         scanf("%d", &selection);
       }
     }
-    printf("\033[H\033[J"); // Comando para limpar a tela
+    
+    
   } while (exec != 'S' || exec != 's');
 
   return 0;
