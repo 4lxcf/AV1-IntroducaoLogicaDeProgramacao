@@ -35,7 +35,7 @@ FACA
         ESCREVA "Insira a Media do aluno nesta Disciplina:";
         LEIA subjectAverage;
 
-        SE subjectAverage ≥ 0. ENTÃO && subjectAverage <= 10. ENTÃO
+        SE subjectAverage ≥ 0. && subjectAverage <= 10. ENTÃO
             subjectCount ← subjectCount + 1;
             averageSum ← averageSum + subjectAverage;
         SENAO
