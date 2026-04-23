@@ -1,0 +1,83 @@
+#include <stdio.h>
+
+int main () {
+
+char CI, nome[30], disciplina[30], recuperacao;
+int identificacao, Nmatricula, quantdisciplina= 0;
+float media, mediasoma=0., mediafinal;
+
+
+
+while (1) { 
+    printf("\n====================SEJA BEM VINDO AO PORTAL DO ALUNO====================\n");
+    
+    printf("Para continuar nosso programa, digite C.\n");
+    printf("Para sair do nosso programa, digite S.\n");
+    scanf(" %c", &CI); 
+
+        //CI=Condição Inicial
+
+        if  (CI == 'S' || CI == 's') { printf ("Voce saiu do programa, ate logo!"); break;} 
+
+printf("Digite seu nome: ");
+scanf(" %s", nome);
+printf("Digite o documento de identificacao, (somente numeros): ");
+scanf("%i", &identificacao);
+printf("Digite o seu numero de matricula, (somente numeros): ");
+scanf("%i", &Nmatricula);
+    
+mediasoma = 0.;  
+quantdisciplina = 0;
+        
+        do {
+            printf("\n============================================================");
+            printf("\n====================DISCIPLINAS CURSADAS====================");
+            printf("\n====================BEM VINDO, %s ====================", nome);
+            printf("\n============================================================\n");
+
+    printf ("As suas notas poderao ser SOMENTE ENTRE 0 ou 10!\n");
+    printf("Em caso de nota NEGATIVA, o programa sera ENCERRADO e exibido a media final das disciplinas ESCRITAS!\n");
+    printf("\nQual a disciplinada cursada?:");
+    scanf(" %s", disciplina);
+    printf("Qual a media obtida na disciplina de %s?: ", disciplina);
+    scanf(" %f", &media); 
+    
+                if (media > 10) {
+                printf ("Suas notas so podem ser de 0 a 10!");
+            
+                if (media < 0) {
+                printf ("Encerrando o programa, ate logo"); 
+            }
+            } else {
+                mediasoma += media;
+                quantdisciplina++;   
+            } 
+            
+            } while (media>=0);  
+
+        mediafinal = (mediasoma/quantdisciplina);    
+            
+        while (mediafinal>=0) {
+              
+            if (mediafinal>=7) {
+                printf ("Aluno APROVADO! Escolha ate cinco novas disciplinas ofertas pelo nosso sistema.");
+            } 
+            else if (mediafinal<7) {
+                printf ("Aluno REPROVADO!\n");
+                printf ("Digite A para repetir novamente a disciplina \nDigite B caso NAO queira repetir a disciplina. ");
+                scanf (" %c", &recuperacao);
+        }
+        
+    
+        if (recuperacao == 'A' || recuperacao == 'a') {printf("Escolha entre quatro novas disciplinas\n"); }
+        if (recuperacao == 'B' || recuperacao == 'b') {
+            printf("\nEscolha entre cinco disciplinas distintas daquelas oferecidas aos alunos aprovados"); }
+        break;
+        }
+}
+
+return 0;
+
+
+
+}
