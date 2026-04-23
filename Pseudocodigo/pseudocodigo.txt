@@ -7,20 +7,19 @@ REAL subjectAverage ← 0., totalAverage ← 0., averageSum;
 
 FACA
 
+    LIMPA_TELA
     ESCREVA "SISTEMA DE MEDIAS E MATRICULAS";
     ESCREVA "Deseja iniciar um novo aluno? Digite 'c' para continuar e 's' para sair.";
     LEIA exec;
-
     SE (exec == 'S' OU exec == 's') ENTÃO
         PARE;
     FIMSE
 
+    LIMPA_TELA
     ESCREVA "Para iniciar, digite o Nome do Aluno:";
     LEIA studentName;
-
     ESCREVA "Agora digite o numero do Documento de Identificacao do aluno (somente numeros):";
     LEIA docId;
-
     ESCREVA "Por fim, digite o Numero de Matricula do aluno (somente numeros):";
     LEIA studentId;
 
@@ -29,31 +28,26 @@ FACA
     averageSum ← 0.;
 
     FACA
+        LIMPA_TELA
         ESCREVA "Otimo! Agora insira o Nome de uma Disciplina cursada:";
         ESCREVA "(Caso deseje parar, coloque uma nota negativa na media)";
         LEIA subject;
-
         ESCREVA "Insira a Media do aluno nesta Disciplina:";
         LEIA subjectAverage;
 
-        SE subjectAverage ≥ 0 ENTÃO
-            LIMPA_TELA
-            SE subjectAverage > 10 ENTÃO
-                ESCREVA "##########################################################";
-                ESCREVA "Valor incorreto! Lembre-se, as notas sao entre 0.0 e 10.0!";
-                ESCREVA "##########################################################";
-            SENAO
-                subjectCount ← subjectCount + 1;
-                averageSum ← averageSum + subjectAverage;
-            FIMSENAO
-        FIMSE
-    ENQUANTO subjectAverage >= 0;
+        SE subjectAverage ≥ 0. ENTÃO && subjectAverage <= 10. ENTÃO
+            subjectCount ← subjectCount + 1;
+            averageSum ← averageSum + subjectAverage;
+        SENAO
+            ESCREVA "Valor incorreto! Lembre-se, as notas sao entre 0.0 e 10.0!";      
+        FIMSENAO
+    ENQUANTO subjectAverage >= 0.;
 
     totalAverage ← averageSum / subjectCount;
     ESCREVA "MEDIA GERAL DO ALUNO: ", totalAverage;
 
-    SE totalAverage ≥ 7 ENTAO
-        ESCREVA "O aluno foi APROVADO. Escolha uma das 5 disciplinas avancadas para cursar:";
+    SE totalAverage ≥ 7. ENTAO
+        ESCREVA "O aluno foi APROVADO. Escolha uma das 5 disciplinas avancadas para cursar (1~5):";
         ESCREVA "1-DISCIPLINA AVANÇADA I";
         ESCREVA "2-DISCIPLINA AVANÇADA II";
         ESCREVA "3-DISCIPLINA AVANÇADA III";
@@ -65,23 +59,22 @@ FACA
         LEIA response
 
         SE response == 's' ENTAO
-            ESCREVA "Escolha uma das 4 disciplinas para cursar:\n1-DISCIPLINA BASICA I\n2-DISCIPLINA BASICA II\n3-DISCIPLINA BASICA III\n4-DISCIPLINA BASICA IV";
+            ESCREVA "Escolha uma das 4 disciplinas para cursar (1~4):";
             ESCREVA "1-DISCIPLINA BASICA I";
             ESCREVA "2-DISCIPLINA BASICA II";
             ESCREVA "3-DISCIPLINA BASICA III";
             ESCREVA "4-DISCIPLINA BASICA IV";
-            LEIA response
+            LEIA selection
         SENAO
-            ESCREVA "Escolha uma das 5 disciplinas para cursar:\n1-DISCIPLINA BASICA I\n2-DISCIPLINA BASICA II\n3-DISCIPLINA BASICA III\n4-DISCIPLINA BASICA IV";
+            ESCREVA "Escolha uma das 5 disciplinas para cursar (1~5):";
             ESCREVA "1-DISCIPLINA ALTERNATIVA I";
             ESCREVA "2-DISCIPLINA ALTERNATIVA II";
             ESCREVA "3-DISCIPLINA ALTERNATIVA III";
             ESCREVA "4-DISCIPLINA ALTERNATIVA IV";
             ESCREVA "5-DISCIPLINA ALTERNATIVA V";]
-            LEIA response
+            LEIA selection
         FIMSENAO
     FIMSENAO
-    LIMPA_TELA
 
 ENQUANTO (exec != 'S' OU exec != 's');
 
